@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 
+if (module.hot) {
+    module.hot.accept();
+  }
+
+const MyContext = React.createContext();
+
 const App = () => {
-    return <h1>Hooks</h1>
+    return (
+        <MyContext.Provider value="Hello World 123">
+            <Child />
+        </MyContext.Provider>
+    );
+};
+
+const Child = () => {
+    const value = useContext(MyContext);
+    return <p>{value}</p>
 };
 
 ReactDOM.render(<App />,document.querySelector('#root'));
